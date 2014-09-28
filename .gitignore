@@ -31,8 +31,8 @@ com_crashlytics_export_strings.xml
 
 ## Eclipse
 .classpath
-.project
-.metadata
+*/.project
+*/.metadata
 **/bin/
 tmp/
 *.tmp
@@ -61,3 +61,23 @@ build/
 
 ## OS Specific
 .DS_Store
+
+android/.classpath
+
+core/.classpath
+
+core/.project
+
+desktop/.classpath
+
+desktop/.project
+
+html/.classpath
+
+html/.project
+
+ios/.classpath
+
+ios/.project
+
+android/.project
