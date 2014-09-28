@@ -177,4 +177,6 @@
 
    END OF TERMS AND CONDITIONS
    
-   This program uses libgdx, which is also licensed under the Apache 2.0 licens.
+   This program uses libgdx, which is also licensed under the Apache 2.0 license.
+   
+   See https://github.com/libgdx/libgdx for more details.
