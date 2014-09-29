@@ -9,6 +9,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class GdxTest extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
+	PlatformIndependent platform;
+
+	public GdxTest(PlatformIndependent platform){
+		this.platform = platform;
+	}
 
 	@Override
 	public void create () {
