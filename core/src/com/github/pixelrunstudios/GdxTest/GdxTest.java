@@ -16,6 +16,7 @@ public class GdxTest extends ApplicationAdapter {
 
 	protected BitmapFont font;
 	protected SpriteBatch batch;
+	protected SpriteBatch overlay;
 	private Texture img;
 	protected Platform platform;
 	protected OrthographicCamera camera;
@@ -36,6 +37,8 @@ public class GdxTest extends ApplicationAdapter {
 	public void create () {
 		//Creates the SpriteBatch
 		batch = new SpriteBatch();
+		//Creates a static SpriteBatch
+		overlay = new SpriteBatch();
 		//Creates the ShapeRenderer
 		renderer = new ShapeRenderer();
 
@@ -96,6 +99,16 @@ public class GdxTest extends ApplicationAdapter {
 		font.draw(batch, "Hello, world!", 100, 100);
 		//End drawing sprites
 		batch.end();
+
+		//Begin drawing overlay
+		overlay.begin();
+		//Draw the string
+		font.setColor(Color.BLACK);
+		font.draw(overlay, String.format("x:%f, y:%f",
+				camera.position.x, camera.position.y), 10,
+				platform.getFrameHeight() - 10);
+		//End drawing overlay
+		overlay.end();
 
 		//Begin drawing shapes
 		renderer.begin(ShapeType.Line);
