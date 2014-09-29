@@ -17,7 +17,7 @@ public class GdxTest extends ApplicationAdapter {
 	protected BitmapFont font;
 	protected SpriteBatch batch;
 	private Texture img;
-	protected PlatformIndependent platform;
+	protected Platform platform;
 	protected OrthographicCamera camera;
 	protected ShapeRenderer renderer;
 
@@ -28,7 +28,7 @@ public class GdxTest extends ApplicationAdapter {
 
 	}
 
-	public GdxTest(PlatformIndependent platform){
+	public GdxTest(Platform platform){
 		this.platform = platform;
 	}
 

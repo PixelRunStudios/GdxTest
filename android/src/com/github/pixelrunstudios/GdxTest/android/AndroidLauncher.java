@@ -6,9 +6,9 @@ import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.github.pixelrunstudios.GdxTest.GdxTest;
-import com.github.pixelrunstudios.GdxTest.PlatformIndependent;
+import com.github.pixelrunstudios.GdxTest.Platform;
 
-public class AndroidLauncher extends AndroidApplication implements PlatformIndependent{
+public class AndroidLauncher extends AndroidApplication implements Platform{
 
 	protected GdxTest core;
 
@@ -20,7 +20,7 @@ public class AndroidLauncher extends AndroidApplication implements PlatformIndep
 	}
 
 	@Override
-	public String getPlatform(){
+	public String getPlatformName(){
 		return "android";
 	}
 

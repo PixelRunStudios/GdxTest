@@ -7,7 +7,7 @@ import org.robovm.apple.uikit.UIScreen;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
 
-public class IOSLauncher extends IOSApplication.Delegate implements PlatformIndependent{
+public class IOSLauncher extends IOSApplication.Delegate implements Platform{
 
 	protected GdxTest core;
 
@@ -24,7 +24,7 @@ public class IOSLauncher extends IOSApplication.Delegate implements PlatformInde
 	}
 
 	@Override
-	public String getPlatform(){
+	public String getPlatformName(){
 		return "ios";
 	}
 

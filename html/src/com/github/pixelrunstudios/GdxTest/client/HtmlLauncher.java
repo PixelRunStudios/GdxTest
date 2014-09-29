@@ -4,9 +4,9 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
 import com.github.pixelrunstudios.GdxTest.GdxTest;
-import com.github.pixelrunstudios.GdxTest.PlatformIndependent;
+import com.github.pixelrunstudios.GdxTest.Platform;
 
-public class HtmlLauncher extends GwtApplication implements PlatformIndependent{
+public class HtmlLauncher extends GwtApplication implements Platform{
 
 	public static final int FRAME_WIDTH = 1280;
 	public static final int FRAME_HEIGHT = 800;
@@ -24,7 +24,7 @@ public class HtmlLauncher extends GwtApplication implements PlatformIndependent{
 	}
 
 	@Override
-	public String getPlatform(){
+	public String getPlatformName(){
 		return "html";
 	}
 

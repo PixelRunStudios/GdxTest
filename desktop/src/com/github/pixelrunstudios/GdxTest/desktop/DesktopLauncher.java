@@ -3,9 +3,9 @@ package com.github.pixelrunstudios.GdxTest.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.github.pixelrunstudios.GdxTest.GdxTest;
-import com.github.pixelrunstudios.GdxTest.PlatformIndependent;
+import com.github.pixelrunstudios.GdxTest.Platform;
 
-public class DesktopLauncher implements PlatformIndependent{
+public class DesktopLauncher implements Platform{
 
 	public static final int FRAME_WIDTH = 1280;
 	public static final int FRAME_HEIGHT = 800;
@@ -20,7 +20,7 @@ public class DesktopLauncher implements PlatformIndependent{
 	}
 
 	@Override
-	public String getPlatform(){
+	public String getPlatformName(){
 		return "desktop";
 	}
 
