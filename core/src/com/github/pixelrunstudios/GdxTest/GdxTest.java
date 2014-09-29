@@ -2,6 +2,7 @@ package com.github.pixelrunstudios.GdxTest;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -20,6 +21,9 @@ public class GdxTest extends ApplicationAdapter {
 	protected OrthographicCamera camera;
 	protected ShapeRenderer renderer;
 
+	protected int width;
+	protected int height;
+
 	protected GdxTest(){
 
 	}
@@ -30,18 +34,47 @@ public class GdxTest extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		//Creates the SpriteBatch
 		batch = new SpriteBatch();
-		img = new Texture(Gdx.files.internal("cat.jpg"));
-		font = new BitmapFont(Gdx.files.internal("font/helvetica-neue-20.fnt"));
-		int width = platform.getFrameWidth();
-		int height = platform.getFrameHeight();
-		camera = new OrthographicCamera(width, height);
-		camera.translate(width/2, height/2);
+		//Creates the ShapeRenderer
 		renderer = new ShapeRenderer();
+
+		//Loads the image
+		img = new Texture(Gdx.files.internal("cat.jpg"));
+		//Loads the font
+		font = new BitmapFont(Gdx.files.internal("font/helvetica-neue-20.fnt"));
+
+		//Calculates the screen width and height
+		width = platform.getFrameWidth();
+		height = platform.getFrameHeight();
+		//Creates a camera with width and height equal to screen size
+		camera = new OrthographicCamera(width, height);
+		//Moves the camera to (0, 0)
+		camera.translate(width/2, height/2);
 	}
 
 	@Override
 	public void render () {
+		//Time passed since last frame
+		final float delta = Gdx.graphics.getDeltaTime();
+
+		//Speed of screen movement in pixels per second
+		float speed = 100;
+
+		//Translates the screen when an arrow key is pressed
+		if(Gdx.input.isKeyPressed(Keys.UP)){
+			camera.translate(0, speed * delta);
+		}
+		if(Gdx.input.isKeyPressed(Keys.DOWN)){
+			camera.translate(0, -speed * delta);
+		}
+		if(Gdx.input.isKeyPressed(Keys.RIGHT)){
+			camera.translate(speed * delta, 0);
+		}
+		if(Gdx.input.isKeyPressed(Keys.LEFT)){
+			camera.translate(-speed * delta, 0);
+		}
+
 		//Updates the camera
 		camera.update();
 
