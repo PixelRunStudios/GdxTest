@@ -6,6 +6,9 @@ import com.github.pixelrunstudios.GdxTest.GdxTest;
 import com.github.pixelrunstudios.GdxTest.PlatformIndependent;
 
 public class DesktopLauncher implements PlatformIndependent{
+
+	protected GdxTest core;
+
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new GdxTest(new DesktopLauncher()), config);
@@ -14,5 +17,10 @@ public class DesktopLauncher implements PlatformIndependent{
 	@Override
 	public String getPlatform(){
 		return "desktop";
+	}
+
+	@Override
+	public void setCoreProgram(GdxTest core){
+		this.core = core;
 	}
 }

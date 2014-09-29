@@ -8,6 +8,9 @@ import com.github.pixelrunstudios.GdxTest.GdxTest;
 import com.github.pixelrunstudios.GdxTest.PlatformIndependent;
 
 public class AndroidLauncher extends AndroidApplication implements PlatformIndependent{
+
+	protected GdxTest core;
+
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -18,5 +21,10 @@ public class AndroidLauncher extends AndroidApplication implements PlatformIndep
 	@Override
 	public String getPlatform(){
 		return "android";
+	}
+
+	@Override
+	public void setCoreProgram(GdxTest core){
+		this.core = core;
 	}
 }

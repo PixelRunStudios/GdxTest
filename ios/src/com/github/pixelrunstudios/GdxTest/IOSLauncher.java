@@ -7,6 +7,9 @@ import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
 
 public class IOSLauncher extends IOSApplication.Delegate implements PlatformIndependent{
+
+	protected GdxTest core;
+
 	@Override
 	protected IOSApplication createApplication() {
 		IOSApplicationConfiguration config = new IOSApplicationConfiguration();
@@ -22,5 +25,10 @@ public class IOSLauncher extends IOSApplication.Delegate implements PlatformInde
 	@Override
 	public String getPlatform(){
 		return "ios";
+	}
+
+	@Override
+	public void setCoreProgram(GdxTest core){
+		this.core = core;
 	}
 }

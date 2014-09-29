@@ -8,6 +8,8 @@ import com.github.pixelrunstudios.GdxTest.PlatformIndependent;
 
 public class HtmlLauncher extends GwtApplication implements PlatformIndependent{
 
+	protected GdxTest core;
+
 	@Override
 	public GwtApplicationConfiguration getConfig () {
 		return new GwtApplicationConfiguration(480, 320);
@@ -21,5 +23,10 @@ public class HtmlLauncher extends GwtApplication implements PlatformIndependent{
 	@Override
 	public String getPlatform(){
 		return "html";
+	}
+
+	@Override
+	public void setCoreProgram(GdxTest core){
+		this.core = core;
 	}
 }
