@@ -7,10 +7,15 @@ import com.github.pixelrunstudios.GdxTest.PlatformIndependent;
 
 public class DesktopLauncher implements PlatformIndependent{
 
+	public static final int FRAME_WIDTH = 1280;
+	public static final int FRAME_HEIGHT = 800;
+
 	protected GdxTest core;
 
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.width = FRAME_WIDTH;
+		config.height = FRAME_HEIGHT;
 		new LwjglApplication(new GdxTest(new DesktopLauncher()), config);
 	}
 
@@ -22,5 +27,15 @@ public class DesktopLauncher implements PlatformIndependent{
 	@Override
 	public void setCoreProgram(GdxTest core){
 		this.core = core;
+	}
+
+	@Override
+	public int getFrameWidth(){
+		return FRAME_WIDTH;
+	}
+
+	@Override
+	public int getFrameHeight(){
+		return FRAME_HEIGHT;
 	}
 }

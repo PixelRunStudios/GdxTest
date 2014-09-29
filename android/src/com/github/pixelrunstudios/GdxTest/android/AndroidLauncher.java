@@ -1,5 +1,6 @@
 package com.github.pixelrunstudios.GdxTest.android;
 
+import android.graphics.Point;
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -26,5 +27,19 @@ public class AndroidLauncher extends AndroidApplication implements PlatformIndep
 	@Override
 	public void setCoreProgram(GdxTest core){
 		this.core = core;
+	}
+
+	@Override
+	public int getFrameWidth(){
+		Point point = new Point();
+		getWindowManager().getDefaultDisplay().getSize(point);
+		return point.x;
+	}
+
+	@Override
+	public int getFrameHeight(){
+		Point point = new Point();
+		getWindowManager().getDefaultDisplay().getSize(point);
+		return point.y;
 	}
 }

@@ -2,6 +2,7 @@ package com.github.pixelrunstudios.GdxTest;
 
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
+import org.robovm.apple.uikit.UIScreen;
 
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
@@ -30,5 +31,17 @@ public class IOSLauncher extends IOSApplication.Delegate implements PlatformInde
 	@Override
 	public void setCoreProgram(GdxTest core){
 		this.core = core;
+	}
+
+	@Override
+	public int getFrameWidth(){
+		UIScreen mainScreen = UIScreen.getMainScreen();
+		return (int) mainScreen.getBounds().getWidth();
+	}
+
+	@Override
+	public int getFrameHeight(){
+		UIScreen mainScreen = UIScreen.getMainScreen();
+		return (int) mainScreen.getBounds().getHeight();
 	}
 }
