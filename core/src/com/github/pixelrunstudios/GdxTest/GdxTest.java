@@ -33,7 +33,10 @@ public class GdxTest extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		img = new Texture(Gdx.files.internal("cat.jpg"));
 		font = new BitmapFont(Gdx.files.internal("font/helvetica-neue-20.fnt"));
-		camera = new OrthographicCamera();
+		int width = platform.getFrameWidth();
+		int height = platform.getFrameHeight();
+		camera = new OrthographicCamera(width, height);
+		camera.translate(width/2, height/2);
 		renderer = new ShapeRenderer();
 	}
 
@@ -44,6 +47,8 @@ public class GdxTest extends ApplicationAdapter {
 
 		//Updates the renderer
 		renderer.setProjectionMatrix(camera.combined);
+		//Updates the batch
+		batch.setProjectionMatrix(camera.combined);
 
 		//Clears the background to blue
 		Gdx.gl.glClearColor(0, 0, 1, 1);
@@ -60,7 +65,7 @@ public class GdxTest extends ApplicationAdapter {
 		batch.end();
 
 		//Begin drawing shapes
-		renderer.begin(ShapeType.Filled);
+		renderer.begin(ShapeType.Line);
 		//Draws the shape
 		renderer.setColor(Color.RED);
 		renderer.rect(50, 50, 100, 100);
