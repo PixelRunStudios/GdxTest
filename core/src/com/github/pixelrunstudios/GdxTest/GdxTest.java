@@ -24,6 +24,14 @@ public class GdxTest extends ApplicationAdapter {
 	protected int width;
 	protected int height;
 
+	private int catX = 0;
+	private int catY = 0;
+	private int snakePosX = 100;
+	private int snakePosY = 100;
+
+	private int snakeLength = 5;
+	public static final int SNAKE_BLOCK_SIZE = 20;
+
 	protected GdxTest(){
 
 	}
@@ -53,26 +61,43 @@ public class GdxTest extends ApplicationAdapter {
 		camera.translate(width/2, height/2);
 	}
 
+	float currentUpdate = 0;
+	float timeBetweenUpdate = 0.25f;
+
 	@Override
 	public void render () {
+
 		//Time passed since last frame
 		final float delta = Gdx.graphics.getDeltaTime();
 
 		//Speed of screen movement in pixels per second
-		float speed = 100;
+		float speed = 1000;
 
 		//Translates the screen when an arrow key is pressed
 		if(Gdx.input.isKeyPressed(Keys.UP)){
-			camera.translate(0, speed * delta);
+			//camera.translate(0, speed * delta);
+			catY += speed*delta;
 		}
 		if(Gdx.input.isKeyPressed(Keys.DOWN)){
-			camera.translate(0, -speed * delta);
+			//camera.translate(0, -speed * delta);
+			catY -= speed*delta;
+
 		}
 		if(Gdx.input.isKeyPressed(Keys.RIGHT)){
-			camera.translate(speed * delta, 0);
+			//camera.translate(speed * delta, 0);
+			catX += speed*delta;
+
 		}
 		if(Gdx.input.isKeyPressed(Keys.LEFT)){
-			camera.translate(-speed * delta, 0);
+			//camera.translate(-speed * delta, 0);
+			catX -= speed*delta;
+
+		}
+
+		currentUpdate += delta;
+		if(currentUpdate > timeBetweenUpdate){
+			currentUpdate = 0;
+			update();
 		}
 
 		//Updates the camera
@@ -84,25 +109,35 @@ public class GdxTest extends ApplicationAdapter {
 		batch.setProjectionMatrix(camera.combined);
 
 		//Clears the background to blue
-		Gdx.gl.glClearColor(0, 0, 1, 1);
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		//Begin drawing sprites
-		batch.begin();
-		//Draw the image
-		batch.draw(img, 0, 0);
-		//Draw the string
-		font.setColor(Color.BLACK);
-		font.draw(batch, "Hello, world!", 100, 100);
-		//End drawing sprites
-		batch.end();
-
 		//Begin drawing shapes
-		renderer.begin(ShapeType.Line);
+		renderer.begin(ShapeType.Filled);
 		//Draws the shape
-		renderer.setColor(Color.RED);
-		renderer.rect(50, 50, 100, 100);
+		//renderer.setColor(Color.BLUE);
+		//renderer.rect(catX-100, catY-100, img.getWidth()+2*100, img.getHeight()+2*100);
+		renderer.setColor(Color.GRAY);
+		for(int i = 0; i<snakeLength;i++){
+			renderer.rect(snakePosX-i*SNAKE_BLOCK_SIZE+1,snakePosY+1,SNAKE_BLOCK_SIZE-2,SNAKE_BLOCK_SIZE-2);
+		}
 		//End drawing shapes
 		renderer.end();
+
+		//Begin drawing sprites
+		//batch.begin();
+		//Draw the image
+		//batch.draw(img, catX, catY);
+		//Draw the string
+		//font.setColor(Color.BLACK);
+		//font.draw(batch, "Hello, world!", 100, 100);
+		//End drawing sprites
+		//batch.end();
+
+
+	}
+
+	public void update(){
+		snakePosX +=20;
 	}
 }
