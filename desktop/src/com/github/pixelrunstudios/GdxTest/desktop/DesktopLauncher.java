@@ -7,7 +7,7 @@ import com.github.pixelrunstudios.GdxTest.Platform;
 
 public class DesktopLauncher implements Platform{
 
-	public static final int FRAME_WIDTH = 1280;
+	public static final int FRAME_WIDTH = 1200;
 	public static final int FRAME_HEIGHT = 800;
 
 	protected GdxTest core;
