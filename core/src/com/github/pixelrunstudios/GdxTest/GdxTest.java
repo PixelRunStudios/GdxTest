@@ -8,7 +8,6 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -20,7 +19,7 @@ public class GdxTest extends ApplicationAdapter {
 	protected BitmapFont font;
 	protected SpriteBatch batch;
 	protected SpriteBatch overlay;
-	private Texture img;
+	//private Texture img;
 	protected Platform platform;
 	protected OrthographicCamera camera;
 	protected ShapeRenderer renderer;
@@ -30,7 +29,7 @@ public class GdxTest extends ApplicationAdapter {
 
 	private int score;
 
-	private boolean executed;
+	//private boolean executed;
 	private boolean update;
 	private boolean eaten;
 
@@ -41,7 +40,7 @@ public class GdxTest extends ApplicationAdapter {
 
 	BlockHolder blocks;
 
-	private int snakeLength;
+	//private int snakeLength;
 	LinkedList<Point> snake;
 	LinkedList<String> directions;
 
@@ -62,7 +61,7 @@ public class GdxTest extends ApplicationAdapter {
 	}
 
 	public void reset(){
-		executed = false;
+		//executed = false;
 		gameOver = false;
 		eaten = false;
 		update = true;
@@ -84,7 +83,7 @@ public class GdxTest extends ApplicationAdapter {
 		counter = 0;
 		lastDir = "RIGHT";
 		eat = false;
-		snakeLength = INITIAL_SNAKE_LENGTH;
+		//snakeLength = INITIAL_SNAKE_LENGTH;
 
 	}
 
@@ -102,7 +101,7 @@ public class GdxTest extends ApplicationAdapter {
 		renderer = new ShapeRenderer();
 
 		//Loads the image
-		img = new Texture(Gdx.files.internal("cat.jpg"));
+		//img = new Texture(Gdx.files.internal("cat.jpg"));
 		//Loads the font
 		font = new BitmapFont(Gdx.files.internal("font/helvetica-neue-20.fnt"));
 
@@ -124,7 +123,7 @@ public class GdxTest extends ApplicationAdapter {
 		final float delta = Gdx.graphics.getDeltaTime();
 
 		//Speed of screen movement in pixels per second
-		float speed = 1000;
+		//float speed = 1000;
 
 		//Translates the screen when an arrow key is pressed
 
@@ -179,7 +178,7 @@ public class GdxTest extends ApplicationAdapter {
 		}
 
 
-		executed = false;
+		//executed = false;
 
 		currentUpdate += delta;
 		if(currentUpdate > timeBetweenUpdate){
@@ -339,11 +338,11 @@ public class GdxTest extends ApplicationAdapter {
 			gameOver = true;
 		}
 		else if(collision("food")){
-			snakeLength++;
+			//snakeLength++;
 			eat = true;
 		}
 
-		executed = true;
+		//executed = true;
 
 	}
 
