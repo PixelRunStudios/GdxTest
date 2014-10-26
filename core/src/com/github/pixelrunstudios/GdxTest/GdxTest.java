@@ -39,6 +39,8 @@ public class GdxTest extends ApplicationAdapter {
 	private static final int INITIAL_SNAKE_LENGTH = 20;
 	public static final int SBS = 20;
 
+	BlockHolder blocks;
+
 	private int snakeLength;
 	LinkedList<Point> snake;
 	LinkedList<String> directions;
@@ -68,7 +70,7 @@ public class GdxTest extends ApplicationAdapter {
 		height = platform.getFrameHeight();
 		Point.maxX = width/SBS;
 		Point.maxY = height/SBS;
-
+		blocks = new BoxBlockHolder(Point.maxX, Point.maxY);
 		snake = new LinkedList<Point>();
 		directions = new LinkedList<String>();
 		snake.clear();
@@ -193,7 +195,10 @@ public class GdxTest extends ApplicationAdapter {
 				int foodY = MathUtils.random(height/SBS);
 				food = new Point(foodX,foodY);
 				for(int i = 0; i < snake.size(); i++){
-					if(!(foodX != snake.get(i).getX() && foodY != snake.get(i).getY())){
+					if(!(food.getX() != snake.get(i).getX() && food.getY() != snake.get(i).getY())){
+						continue outer;
+					}
+					if(!blocks.allowFood(food.getX(), food.getY())){
 						continue outer;
 					}
 				}
@@ -224,6 +229,14 @@ public class GdxTest extends ApplicationAdapter {
 		renderer.setColor(Color.GRAY);
 		for(int i = 0; i<snake.size();i++){
 			renderer.rect(snake.get(i).getX()*SBS+1,snake.get(i).getY()*SBS+1, SBS-2,SBS-2);
+		}
+		renderer.setColor(Color.BLUE);
+		for(int i = 0; i < Point.maxX; i++){
+			for(int j = 0; j < Point.maxY; j++){
+				if(blocks.hasBlock(i, j)){
+					renderer.rect(i*SBS+1,j*SBS+1, SBS-2,SBS-2);
+				}
+			}
 		}
 		renderer.setColor(Color.RED);
 		renderer.rect(food.getX()*SBS+1, food.getY()*SBS+1, SBS-2, SBS-2);
@@ -322,7 +335,10 @@ public class GdxTest extends ApplicationAdapter {
 		if(collision("self")){
 			gameOver = true;
 		}
-		if(collision("food")){
+		else if(collision("block")){
+			gameOver = true;
+		}
+		else if(collision("food")){
 			snakeLength++;
 			eat = true;
 		}
@@ -342,6 +358,12 @@ public class GdxTest extends ApplicationAdapter {
 				}
 			}
 			return done;
+		}
+		if(item.equals("block")){
+			if(blocks.hasBlock(snake.get(0).getX(), snake.get(0).getY())){
+				return true;
+			}
+			return false;
 		}
 		else if(item.equals("food")){
 			boolean addScore = false;
