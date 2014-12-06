@@ -41,6 +41,7 @@ public class GdxTest extends ApplicationAdapter {
 	BlockHolder blocks;
 
 	//private int snakeLength;
+	//NOTE: point at index 0 is the head
 	LinkedList<Point> snake;
 	LinkedList<String> directions;
 
@@ -69,7 +70,7 @@ public class GdxTest extends ApplicationAdapter {
 		height = platform.getFrameHeight();
 		Point.maxX = width/SBS;
 		Point.maxY = height/SBS;
-		blocks = new BoxBlockHolder(Point.maxX, Point.maxY);
+		blocks = randomBlockHolder(Point.maxX, Point.maxY);
 		snake = new LinkedList<Point>();
 		directions = new LinkedList<String>();
 		snake.clear();
@@ -83,8 +84,29 @@ public class GdxTest extends ApplicationAdapter {
 		counter = 0;
 		lastDir = "RIGHT";
 		eat = false;
+		totalDelta = 0;
 		//snakeLength = INITIAL_SNAKE_LENGTH;
 
+	}
+
+	private BlockHolder randomBlockHolder(int maxX, int maxY){
+		int i = MathUtils.random(5);
+		switch(i){
+			case 0:
+				return new BoxBlockHolder(maxX, maxY);
+			case 1:
+				return new CurveBlockHolder(maxX, maxY);
+			case 2:
+				return new CrossBlockHolder(maxX, maxY);
+			case 3:
+				return new BorderBlockHolder(maxX, maxY);
+			case 4:
+				return new MovingVerticalBlockHolder(maxX, maxY);
+			case 5:
+				return new EmptyBlockHolder();
+			default:
+				return null;
+		}
 	}
 
 	@Override
@@ -114,6 +136,7 @@ public class GdxTest extends ApplicationAdapter {
 
 	String next1;
 	String next2;
+	private float totalDelta;
 
 	@Override
 	public void render () {
@@ -121,6 +144,9 @@ public class GdxTest extends ApplicationAdapter {
 		counter++;
 		//Time passed since last frame
 		final float delta = Gdx.graphics.getDeltaTime();
+		if(!gameOver){
+			totalDelta += delta;
+		}
 
 		//Speed of screen movement in pixels per second
 		//float speed = 1000;
@@ -225,14 +251,19 @@ public class GdxTest extends ApplicationAdapter {
 		renderer.begin(ShapeType.Filled);
 
 
-		renderer.setColor(Color.GRAY);
+
 		for(int i = 0; i<snake.size();i++){
+			renderer.setColor(Color.GRAY);
+			if(i == 0){
+				renderer.setColor(Color.GREEN);
+			}
 			renderer.rect(snake.get(i).getX()*SBS+1,snake.get(i).getY()*SBS+1, SBS-2,SBS-2);
+
 		}
 		renderer.setColor(Color.BLUE);
 		for(int i = 0; i < Point.maxX; i++){
 			for(int j = 0; j < Point.maxY; j++){
-				if(blocks.hasBlock(i, j)){
+				if(blocks.hasBlock(i, j, totalDelta)){
 					renderer.rect(i*SBS+1,j*SBS+1, SBS-2,SBS-2);
 				}
 			}
@@ -359,8 +390,10 @@ public class GdxTest extends ApplicationAdapter {
 			return done;
 		}
 		if(item.equals("block")){
-			if(blocks.hasBlock(snake.get(0).getX(), snake.get(0).getY())){
-				return true;
+			for(Point p : snake){
+				if(blocks.hasBlock(p.getX(), p.getY(), totalDelta)){
+					return true;
+				}
 			}
 			return false;
 		}
